@@ -23,11 +23,11 @@ Chi Kien Nguyen
 On CMD, enter command <b>pgprogram <i>fname</i></b>. (Where fname is the name of a file/folder)
 <h3>With specified arguments: </h3>
 <table>
-    <th>
+    <tr>
         <td>Option 1</td>
         <td>Option 2</td>
         <td>Functionality</td>
-    </th>
+    </tr>
     <tr>
         <td>--input</td>
         <td>-i</td>
@@ -47,9 +47,9 @@ On CMD, enter command <b>pgprogram <i>fname</i></b>. (Where fname is the name of
 
 <h1>Examples</h1>
 <h3>Run the program with --help, -h, --version and -v</h3>
-<img src="./images/Command(1).jpg"/>
+<img src="./images/Command(1).JPG"/>
 <h3>Run the program with --input, -i, and no arguments</h3>
-<img src="./images/Command(2).jpg"/>
+<img src="./images/Command(2).JPG"/>
 
 <h1>License</h1>
 <a href="https://opensource.org/licenses/MIT">MIT License</a>
