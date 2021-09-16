@@ -19,6 +19,8 @@ Chi Kien Nguyen
 </ul>
 
 <h1>How To Run</h1>
+<h3>Compiling</h3>
+g++ pgprogram.cpp HTMLFile.h HTMLFile.cpp MainPage.h MainPage.cpp -o pgprogram --std=c++17
 <h3>Without specified arguments</h3>
 On CMD, enter command <b>pgprogram <i>fname</i></b>. (Where fname is the name of a file/folder)
 <h3>With specified arguments: </h3>
