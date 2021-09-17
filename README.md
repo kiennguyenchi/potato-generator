@@ -15,14 +15,18 @@ Chi Kien Nguyen
 <h1>System Requirements</h1>
 <ul>
     <li>C++17 Compiler (Visual Studio Code)</li>
-    <li>MINGW (Optional)</li>
+    <ul>
+        <li>Install C/C++ extension on VS Code.</li>
+        <li>Click on Extension Setting/Type <b>cppstandard</b> in the search box/Change to C++17</li>
+    </ul>
+    <li>MINGW <a href="https://code.visualstudio.com/docs/cpp/config-mingw">(Instructions to install)</a></li>
 </ul>
 
 <h1>How To Run</h1>
 <h3>Compiling</h3>
 g++ pgprogram.cpp HTMLFile.h HTMLFile.cpp MainPage.h MainPage.cpp -o pgprogram --std=c++17
 <h3>Without specified arguments</h3>
-On CMD, enter command <b>pgprogram <i>fname</i></b>. (Where fname is the name of a file/folder)
+On CMD, enter command <b>./pgprogram <i>fname</i></b> (Where fname is the name of a file/folder)
 <h3>With specified arguments: </h3>
 <table>
     <tr>
