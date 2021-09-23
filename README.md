@@ -10,6 +10,7 @@ Chi Kien Nguyen
     <li>With a text file input, the tool creates a single HTML page.</li>
     <li>The tool generates h1 tag for title of each site.</li>
     <li>The tool uses stylesheet for better format on websites.</li>
+    <li>The tool also supports to convert Markdown file. </li>
 </ul>
 
 <h1>System Requirements</h1>
@@ -57,4 +58,3 @@ On CMD, enter command <b>pgprogram <i>fname</i></b>. (Where fname is the name of
 <a href="https://gifted-brattain-2278d4.netlify.app/sherlock-holmes-selected-stories/sherlock-holmes-selected-stories">Websites</a>
 <h1>License</h1>
 <a href="https://opensource.org/licenses/MIT">MIT License</a>
-
