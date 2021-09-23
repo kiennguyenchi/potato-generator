@@ -80,6 +80,10 @@ void HTMLFile::setHtmlBody(vector<string> file){
     htmlFile += ("\n<body>\n\t<div><h1>" + file.at(0) + "</h1></div><br>\n\t<div>\n");
     for(int i=1; i < file.size(); i++){
             htmlFile += ("\t\t<p>" + file.at(i) + "</p><br>\n");
+            if (file.at(i).find('#') != -1){
+                file.at(i).erase(file.at(i).find('#'), 1);
+                htmlFile += "<h1>" + file.at(i) + "</h1>";
+            }
     }
     htmlFile += "\t</div>\n</body>\n</html>";
 }
