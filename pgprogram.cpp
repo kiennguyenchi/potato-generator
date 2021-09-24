@@ -33,8 +33,12 @@ int main(int argc, char** argv)
             fs::current_path("./");
             fs::create_directory("dist");
 
-            if (folderOrFile > name.size() || mdFile > name.size()){
-                createManyHTML(name);
+            if (folderOrFile > name.size()){
+                if (mdFile > name.size()){
+                    createManyHTML(name);
+                }else{
+                    createOneHTML(name);
+                }
             }else{
                 createOneHTML(name);
             }
