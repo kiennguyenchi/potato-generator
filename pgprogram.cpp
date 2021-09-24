@@ -76,7 +76,7 @@ string checkArguments(int argc, char** argv){
             fName = "terminate";
             break;
         }else if (string(argv[i]) == "--help" || string(argv[i]) == "-h"){
-            cout << "*Run the program with command: pgprogram inputName\n";
+            cout << "*Run the program with command: ./pgprogram inputName\n";
             cout << "The inputName is a text file name or a folder name\n";
             cout << "*To include a input file/folder, include --input or -i before the file/folder name in the arguments.\n";
             cout << "*To see the version of the program, include --version or -v in the arguments.\n";
