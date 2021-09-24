@@ -27,13 +27,18 @@ int main(int argc, char** argv)
             if (name == "")
                 name = argv[1];
             size_t folderOrFile = name.find(".txt");
+            size_t mdFile = name.find(".md");
             
             fs::remove_all("./dist");
             fs::current_path("./");
             fs::create_directory("dist");
 
             if (folderOrFile > name.size()){
-                createManyHTML(name);
+                if (mdFile > name.size()){
+                    createManyHTML(name);
+                }else{
+                    createOneHTML(name);
+                }
             }else{
                 createOneHTML(name);
             }

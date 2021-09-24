@@ -1,6 +1,4 @@
-Potato Generator
-================
-
+# Potato Generator
 This is a C++ Static Site Generator (SSG) tool.
 
 Author
