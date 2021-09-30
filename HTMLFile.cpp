@@ -8,7 +8,7 @@
 #include "HTMLFile.h"
 
 //this function opens and reads a text file
-void HTMLFile::openFile(string fileName){
+void HTMLFile::openFile(string fileName, string lang){
     ifstream externalFile;
     externalFile.open(fileName, ios::in);
     if (externalFile.is_open()){
@@ -24,6 +24,7 @@ void HTMLFile::openFile(string fileName){
             temp = "";
         }
         externalFile.close();
+        language = lang;
     }
 
 }
@@ -69,7 +70,10 @@ string HTMLFile::getURL(){
 
 //this function sets up HTML Page header
 void HTMLFile::setHtmlHead(string title){
-    htmlFile ="<!doctype html><html lang='en'>\n<head>\n\t<meta charset='utf-8'>\n";
+    if (language == "") 
+        htmlFile ="<!doctype html><html lang='en'>\n<head>\n\t<meta charset='utf-8'>\n";
+    else
+        htmlFile ="<!doctype html><html lang='" + language + "'>\n<head>\n\t<meta charset='utf-8'>\n";
     htmlFile += ("\t<title>" + title + "</title>\n");
     htmlFile += ("<link rel='stylesheet' href='../pgprogram.css'>");
     htmlFile += "\t<meta name='viewport' content='width=device-width, initial-scale=1'>\n</head>\n";
@@ -77,7 +81,7 @@ void HTMLFile::setHtmlHead(string title){
 
 //this function sets up HTML Page body
 void HTMLFile::setHtmlBody(vector<string> file){
-    htmlFile += ("\n>body>\n\t<div>\n");
+    htmlFile += ("\n<body>\n\t<div>\n");
     for(int i = 0; i < textFile.size(); i++){
             if (textFile.at(i).find("#") != -1){
                 textFile.at(i).erase(textFile.at(i).find('#'), 1);

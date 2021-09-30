@@ -8,11 +8,11 @@
 #include "MainPage.h"
 
 //this function sets up main page and linked websites
-void MainPage::setMainPage(string name, vector<string> textFiles){
+void MainPage::setMainPage(string name, vector<string> textFiles, string lang){
     setFolderName(name);
     for (int i = 0; i < textFiles.size();i++){
         HTMLFile newFile;
-        newFile.openFile(textFiles.at(i));
+        newFile.openFile(textFiles.at(i), lang);
         newFile.setHtmlFile();
         string fileName = textFiles.at(i).substr(textFiles.at(i).find(folderName) + 2, textFiles.at(i).size() - 2);
         newFile.writeHTML();

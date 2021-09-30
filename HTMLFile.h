@@ -16,12 +16,14 @@ class HTMLFile
 {
 	vector<string> textFile;
 	string htmlFile;
+    string language;
 public:
     HTMLFile(){
         htmlFile = "";
+        language = "";
     }
 
-    void openFile(string fileName);
+    void openFile(string fileName, string lang);
     vector<string> getTextFile();
     void displayTextFile();
     void setHtmlFile();

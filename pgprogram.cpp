@@ -14,15 +14,16 @@ using namespace std;
 using std::filesystem::directory_iterator;
 namespace fs = std::filesystem;
 
-void createOneHTML(string filename);
-void createManyHTML(string folderName);
+void createOneHTML(string filename, string lang);
+void createManyHTML(string folderName, string lang);
 string checkArguments(int argc, char** argv);
+string checkLanguage(int argc, char** argv);
 
 int main(int argc, char** argv)
 {
     if(argc >= 2){
+        string language = checkLanguage(argc, argv);
         string name = checkArguments(argc, argv);
-        
         if (name != "terminate"){
             if (name == "")
                 name = argv[1];
@@ -35,12 +36,12 @@ int main(int argc, char** argv)
 
             if (folderOrFile > name.size()){
                 if (mdFile > name.size()){
-                    createManyHTML(name);
+                    createManyHTML(name, language);
                 }else{
-                    createOneHTML(name);
+                    createOneHTML(name, language);
                 }
             }else{
-                createOneHTML(name);
+                createOneHTML(name, language);
             }
         }
 
@@ -50,20 +51,20 @@ int main(int argc, char** argv)
 }
 
 //this function creates a single HTML page
-void createOneHTML(string filename){
+void createOneHTML(string filename, string lang){
     HTMLFile newFile;
-    newFile.openFile(filename);
+    newFile.openFile(filename, lang);
     newFile.setHtmlFile();
     newFile.writeHTML();
 }
 
 //this function creates multiple HTML page
-void createManyHTML(string folderName){
+void createManyHTML(string folderName, string lang){
     vector<string> fileNames;
     for (const auto & file : directory_iterator(folderName))
         fileNames.push_back(file.path().string());
     MainPage newPage;
-    newPage.setMainPage(folderName, fileNames);
+    newPage.setMainPage(folderName, fileNames, lang);
     newPage.writeHTML();
 }
 
@@ -89,4 +90,16 @@ string checkArguments(int argc, char** argv){
         }
     }
     return fName;
+}
+
+//this function checks for language specified
+string checkLanguage(int argc, char** argv){
+    string language = "";
+    for (int i = 1; i < argc; i++) {
+        if (string(argv[i]) == "--lang" || string(argv[i]) == "-l"){
+            language = argv[(i+1)];
+            break;
+        } 
+    }
+    return language;
 }

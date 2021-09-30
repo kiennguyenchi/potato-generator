@@ -16,12 +16,14 @@ class MainPage{
     string folderName;
     vector<HTMLFile> sites;
 	string htmlFile;
+    string language;
 public:
     MainPage(){
         folderName = "";
         htmlFile = "";
+        language = "";
     }
-    void setMainPage(string name, vector<string> textFiles);
+    void setMainPage(string name, vector<string> textFiles, string lang);
     string getMainPage();
     void displayMainPage();
     void setHTMLMainPage();
