@@ -86,7 +86,10 @@ void HTMLFile::setHtmlBody(vector<string> file){
             if (textFile.at(i).find("#") != -1){
                 textFile.at(i).erase(textFile.at(i).find('#'), 1);
                 htmlFile += "<h1>" + textFile.at(i) + "</h1>";
-            }else{
+            }else if(textFile.at(i) == "---"){
+                htmlFile += "<hr>";
+            }
+            else{
                 htmlFile += ("\t\t<p>" + textFile.at(i) + "</p><br>\n");
             }
     }
