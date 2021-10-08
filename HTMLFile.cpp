@@ -97,8 +97,8 @@ void HTMLFile::setHtmlBody(vector<string> file){
 }
 
 //this function creates HTML Page
-void HTMLFile::writeHTML(){
-    string name = "dist/" + getURL();
+void HTMLFile::writeHTML(string path){    
+    string name = "./" + path + "/" + getURL();
     ofstream file(name);
     file << getHtmlFile() << endl;
     file.close();

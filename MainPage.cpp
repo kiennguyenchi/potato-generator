@@ -8,14 +8,14 @@
 #include "MainPage.h"
 
 //this function sets up main page and linked websites
-void MainPage::setMainPage(string name, vector<string> textFiles, string lang){
-    setFolderName(name);
+void MainPage::setMainPage(string path, vector<string> textFiles, string lang){
+    setFolderName(path);
     for (int i = 0; i < textFiles.size();i++){
         HTMLFile newFile;
         newFile.openFile(textFiles.at(i), lang);
         newFile.setHtmlFile();
         string fileName = textFiles.at(i).substr(textFiles.at(i).find(folderName) + 2, textFiles.at(i).size() - 2);
-        newFile.writeHTML();
+        newFile.writeHTML(path);
         sites.push_back(newFile);
     }
     setHTMLMainPage();
@@ -45,9 +45,8 @@ void MainPage::setHTMLMainPage(){
 }
 
 //this function writes HTML main page
-void MainPage:: writeHTML(){
-    string name = "dist/";
-    name += (getFolderName() +".html");
+void MainPage:: writeHTML(string path){
+    string name = "./" + path + "/" + path + ".html";
     ofstream file(name);
     file << getMainPage() << endl;
     file.close();

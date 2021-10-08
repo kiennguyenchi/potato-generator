@@ -33,6 +33,6 @@ public:
     string getURL();
     void setHtmlHead(string title);
     void setHtmlBody(vector<string> file);
-    void writeHTML();
+    void writeHTML(string path);
 };
 

@@ -1,0 +1,5 @@
+{
+  "input": "./docs",
+  "output": "./web",
+  "future-feature": "should be ignored for now"
+}

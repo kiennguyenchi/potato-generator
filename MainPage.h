@@ -27,7 +27,7 @@ public:
     string getMainPage();
     void displayMainPage();
     void setHTMLMainPage();
-    void writeHTML();
+    void writeHTML(string path);
     void setFolderName(string name);
     string getFolderName();
 };
