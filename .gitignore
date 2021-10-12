@@ -1,0 +1,8 @@
+# Untracked folders
+dist/
+
+# Untracked files
+*.json
+
+# Untracked compiled source
+*.exe

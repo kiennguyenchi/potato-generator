@@ -14,71 +14,79 @@ using namespace std;
 using std::filesystem::directory_iterator;
 namespace fs = std::filesystem;
 
-void createOneHTML(string filename, string outPath, string lang);
-void createManyHTML(string folderName, string outPath, string lang);
+void createHTMLFile(string filename, string outPath, string lang);
+void createMainPageWithHTMLs(string folderName, string outPath, string lang);
 string checkArguments(int argc, char** argv);
 string checkLanguage(int argc, char** argv);
 bool checkIfConfig(int argc, char** argv);
 void makeDir(string outputDir);
 string readConfig(string fileName);
+string getOutputArgument(int argc, char** argv);
+string getLangArgument(int argc, char** argv);
 
 
 int main(int argc, char** argv)
-{    
-
-    if(argc >= 2){
-        string language = checkLanguage(argc, argv);
+{   
+    if (argc >= 2){
         string name = checkArguments(argc, argv);
-        string temp = readConfig(name);
-        bool configFlag = checkIfConfig(argc, argv);
-
-        //if empty config
-        if (configFlag == true && temp.find("\"") == string::npos) {
-            name = "terminate";
-        }
-
-        if (name != "terminate") {
-            if (name == "")
-                name = argv[1];
-            
+        if (name != "terminate"){
+            bool configFlag = checkIfConfig(argc, argv);
             string outFolder = "./dist";
-            //if output folder is specified in config file
-            if (temp.find("output") != string::npos) {  
-                size_t start = temp.find("output") + 12;
-                size_t end = temp.find("\"", start - 1);
-                outFolder = temp.substr(start, (end - start));
-            }
-            makeDir(outFolder);
-            //get input from config file
-            if (temp.find("input") != string::npos)
-            {
-                size_t start = temp.find("input") + 9;
-                size_t end = temp.find("\"", start + 2);
-                name = temp.substr(start, (end - start));
+            string language = checkLanguage(argc, argv);
+            bool valid = true;
+            if(configFlag){
+                string temp = readConfig(name);
+                if(temp.find("\"") == string::npos){
+                    cout << "Empty config file. Please try again." << endl;
+                    valid = false;
+                }else{
+                    //get input from config file
+                    if (temp.find("input") != string::npos)
+                    {
+                        size_t start = temp.find("input") + 9;
+                        size_t end = temp.find("\"", start + 2);
+                        name = temp.substr(start, (end - start));
+                    } else {
+                        valid = false;
+                        cout << "There is no input file" << endl;
+                    } 
+                    //if output folder is specified in config file
+                    if (temp.find("output") != string::npos) {  
+                        size_t start = temp.find("output") + 12;
+                        size_t end = temp.find("\"", start - 1);
+                        outFolder = temp.substr(start, (end - start));
+                    }
+                    
+                    if (temp.find("lang") != string::npos) {  
+                        size_t start = temp.find("lang") + 8;
+                        size_t end = temp.find("\"", start - 1);
+                        language = temp.substr(start, (end - start));
+                    }
+                }
+            }else{
+                if (getOutputArgument(argc, argv) != "")
+                    outFolder = getOutputArgument(argc, argv);
+                if (getLangArgument(argc, argv) != "")
+                    language = getLangArgument(argc, argv);
             }
 
-            if (configFlag || name.find("./") != string::npos) {
-                createManyHTML(name, outFolder, language);
-            }
-            else if (name.find(".txt") != string::npos) {
-                createOneHTML(name, outFolder, language);
-            }
-            else if (name.find(".md") != string::npos) {
-                createOneHTML(name, outFolder, language);
+            if (valid){
+                makeDir(outFolder); 
+                if (name.find(".txt") != string::npos || name.find(".md") != string::npos) {
+                    createHTMLFile(name, outFolder, language);
+                }
+                else{
+                    createMainPageWithHTMLs(name, outFolder, language);
+                }
             }
         }
-
-        else if (configFlag == true) {
-            cout << "Empty config file. Please try again." << endl;
-        }
-    }
-    else {
+    }else {
         cout << "Failed arguments provided";
     }
 }
 
 //this function creates a single HTML page
-void createOneHTML(string filename,string outPath, string lang){   
+void createHTMLFile(string filename,string outPath, string lang){   
     HTMLFile newFile;
     newFile.openFile(filename, lang);
     newFile.setHtmlFile();
@@ -86,25 +94,24 @@ void createOneHTML(string filename,string outPath, string lang){
 }
 
 //this function creates multiple HTML page
-void createManyHTML(string folderName, string outPath, string lang){
+void createMainPageWithHTMLs(string folderName, string outPath, string lang){
     vector<string> fileNames;
     for (const auto& file : directory_iterator(folderName)) {
         fileNames.push_back(file.path().string());
         MainPage newPage;
         newPage.setMainPage(outPath, fileNames, lang);
         newPage.writeHTML(outPath);
-    }
-        
+    }       
 }
 
 //this function checks for arguments input
 string checkArguments(int argc, char** argv){
-    string fName = "";
+    string fileName = "";
     
     for (int i = 1; i < argc; i++) {
         if (string(argv[i]) == "--version" || string(argv[i]) == "-v") {
             cout << "Potato Generator - Version 0.1";
-            fName = "terminate";
+            fileName = "terminate";
             break;
         }
         else if (string(argv[i]) == "--help" || string(argv[i]) == "-h") {
@@ -114,22 +121,23 @@ string checkArguments(int argc, char** argv){
             cout << "*To specify an config file, use --config or -c before the config filename.\n";
             cout << "*To see the version of the program, include --version or -v in the arguments.\n";
             cout << "*To need help, include --help or -h in the arguments.\n";
-            fName = "terminate";
+            fileName = "terminate";
             break;
         }
         else if (string(argv[i]) == "--input" || string(argv[i]) == "-i") {
-            fName = argv[i+1];
+            fileName = argv[i+1];
             break;
         }
         else if (string(argv[i]) == "--config" || string(argv[i]) == "-c") {
-            fName = argv[i+1]; 
+            fileName = argv[i+1]; 
             break;
         }
     }
         
     
-    return fName;
+    return fileName;
 }
+
 
 //this function checks for language specified
 string checkLanguage(int argc, char** argv){
@@ -153,14 +161,8 @@ bool checkIfConfig(int argc, char** argv) {
 }
 
 void makeDir(string outputDir) {
-    fs::remove_all("./dist");
-    if (outputDir != "./dist") {
-        outputDir = "./" + outputDir;
-        fs::create_directory(outputDir);
-    }
-    else {
-        fs::create_directory("./dist");
-    }
+    fs::remove_all(outputDir);
+    fs::create_directory(outputDir);
 }
 
 string readConfig(string fileName) {
@@ -172,4 +174,25 @@ string readConfig(string fileName) {
         configFile.close();
     }
     return storeConfig;
+}
+
+string getOutputArgument(int argc, char** argv){
+    string value = "";
+    for (int i = 1; i < argc; i++) {
+        if (string(argv[i]) == "--output" || string(argv[i]) == "-o"){
+            value = argv[i+1];
+            break;
+        }
+    }
+    return value;
+}
+string getLangArgument(int argc, char** argv){
+    string value = "";
+    for (int i = 1; i < argc; i++) {
+        if (string(argv[i]) == "--lang" || string(argv[i]) == "-l"){
+            value = argv[i+1];
+            break;
+        }
+    }
+    return value;
 }
