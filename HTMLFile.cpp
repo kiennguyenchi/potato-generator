@@ -83,13 +83,20 @@ void HTMLFile::setHtmlHead(string title){
 void HTMLFile::setHtmlBody(vector<string> file){
     htmlFile += ("\n<body>\n\t<div>\n");
     for(int i = 0; i < textFile.size(); i++){
-            if (textFile.at(i).find("#") != -1){
+            if(textFile.at(i).find("```") != -1){
+                int j;
+                htmlFile += "<div style='background-color: black; color: white;'>\n" + textFile.at(i).substr(textFile.at(i).find("```")+3, textFile.at(i).size() - textFile.at(i).find("```") - 2);
+                for(j=i+1; textFile.at(j).find("```") == -1; j++){
+                    htmlFile += "\n<p style='font-family:Consolas;'>" + textFile.at(j) + "</p>";
+                }
+                htmlFile +=  textFile.at(j).substr(0, textFile.at(j).size() - 3) + "</div>\n";
+                i = j;
+            }else if (textFile.at(i).find("#") != -1){
                 textFile.at(i).erase(textFile.at(i).find('#'), 1);
                 htmlFile += "<h1>" + textFile.at(i) + "</h1>";
             }else if(textFile.at(i) == "---"){
                 htmlFile += "<hr>";
-            }
-            else{
+            }else{
                 htmlFile += ("\t\t<p>" + textFile.at(i) + "</p><br>\n");
             }
     }
