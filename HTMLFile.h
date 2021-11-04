@@ -5,20 +5,21 @@
 */
 
 /* This is the file containing functionalities of a single HTML page */
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <vector>
-#include <filesystem>
 using namespace std;
 namespace fs = std::filesystem;
-class HTMLFile
-{
-	vector<string> textFile;
-	string htmlFile;
+class HTMLFile {
+    vector<string> textFile;
+    string htmlFile;
     string language;
+
 public:
-    HTMLFile(){
+    HTMLFile()
+    {
         htmlFile = "";
         language = "";
     }
@@ -35,4 +36,3 @@ public:
     void setHtmlBody(vector<string> file);
     void writeHTML(string path);
 };
-

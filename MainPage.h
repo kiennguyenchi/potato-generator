@@ -5,20 +5,22 @@
 */
 
 /* This is the file containing functionalities of a main page */
+#include "HTMLFile.h"
+#include <filesystem>
 #include <iostream>
 #include <vector>
-#include <filesystem>
-#include "HTMLFile.h"
 using namespace std;
 namespace fs = std::filesystem;
 
-class MainPage{
+class MainPage {
     string folderName;
     vector<HTMLFile> sites;
-	string htmlFile;
+    string htmlFile;
     string language;
+
 public:
-    MainPage(){
+    MainPage()
+    {
         folderName = "";
         htmlFile = "";
         language = "";
