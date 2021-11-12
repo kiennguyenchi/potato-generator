@@ -73,3 +73,10 @@ clang-tidy --checks='modernize*, readability*' filename.cpp -- -std=c++17
 
 	*   Install clang-tidy extension
 	*   It will read through your file and show errors/warnings
+
+### Testing
+
+*   Download *catch.hpp* from [Catch2 Repo](https://github.com/catchorg/Catch2) (already in test folder)
+*   Add *test#.cpp* file (# represents for number accordingly)
+*   Execute *g++ ./test/test#.cpp -o test# --std=c++17*
+*   See the results in the Output
