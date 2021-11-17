@@ -16,7 +16,5 @@ jobs:
     - name: compile
       run: g++ pgprogram.cpp HTMLFile.h HTMLFile.cpp MainPage.h MainPage.cpp -o pgprogram --std=c++17
     - name: test2
-      run: g++ test/test2.cpp HTMLFile.h HTMLFile.cpp -o test2 --std=c++17
-    - name: run test2
-      run: test2
+      run: g++ test/test.cpp HTMLFile.h HTMLFile.cpp -o test --std=c++17
 
