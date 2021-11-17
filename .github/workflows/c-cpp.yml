@@ -15,6 +15,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: compile
       run: g++ pgprogram.cpp HTMLFile.h HTMLFile.cpp MainPage.h MainPage.cpp -o pgprogram --std=c++17
-    - name: test
-      run: g++ test/test.cpp HTMLFile.h HTMLFile.cpp -o test --std=c++17
+    - name: Program Test
+      run: g++ test/test.cpp test/catch.hpp HTMLFile.h HTMLFile.cpp -o programtest --std=c++17
 
