@@ -17,7 +17,5 @@ jobs:
       run: g++ pgprogram.cpp HTMLFile.h HTMLFile.cpp MainPage.h MainPage.cpp -o pgprogram --std=c++17
     - name: test2
       run: g++ test/test2.cpp test/catch.hpp HTMLFile.h HTMLFile.cpp -o test2 --std=c++17
-    - name: make check
-      run: make check
     - name: make distcheck
       run: make distcheck
