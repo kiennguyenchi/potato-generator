@@ -66,13 +66,19 @@ string HTMLFile::getHtmlFile()
 //this function gets title of the page
 string HTMLFile::getTitle()
 {
-    return textFile.at(0).substr(1, textFile.at(0).size() - 1);
+    if(textFile.size() == 0)
+        return "";
+    else
+        return textFile.at(0).substr(1, textFile.at(0).size() - 1);
 }
 
 //this function gets URL of the page
 string HTMLFile::getURL()
 {
-    return (getTitle().substr(0, getTitle().find('.')) + ".html");
+    if(textFile.size() == 0)
+        return "";
+    else
+        return (getTitle().substr(0, getTitle().find('.')) + ".html");
 }
 
 //this function sets up HTML Page header
