@@ -21,3 +21,10 @@ TEST_CASE("Check non-existing files")
     file.openFile("../Sherlock-Holmes-Selected-Stories/notafile.txt", "fr");
     REQUIRE(file.getURL() == "");
 }
+
+TEST_CASE("Check getTitle()")
+{
+    HTMLFile file; 
+    file.openFile("./Sherlock-Holmes-Selected-Stories/Silver Blaze.txt", "eng");
+    REQUIRE(file.getTitle() == "Silver Blaze");
+}
