@@ -68,6 +68,18 @@ Examples
 
 ![](./images/Command(2).JPG)
 
+Install package
+==================
+* Install [Conan]() and [CMake]()
+* Install package by Conan command
+```
+conan install potato-generator --remote=gitlab
+```
+* Add remote
+```
+conan remote add gitlab https://gitlab.com/api/v4/projects/31616511/packages/conan
+```
+
 Generated Websites
 ==================
 
