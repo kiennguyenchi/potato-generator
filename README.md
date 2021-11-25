@@ -70,7 +70,7 @@ Examples
 
 Install package
 ==================
-* Install [Conan]() and [CMake]()
+* Install [Conan](https://conan.io/) and [CMake](https://cmake.org/)
 * Install package by Conan command
 ```
 conan install potato-generator --remote=gitlab
